@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CashCourse — Learn Money. Build Your Future.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" class="hidden">
+    <div class="login-wrap">
+        <div class="login-logo"><div class="login-logo-icon">C$</div>CashCourse</div>
+        <div class="login-card">
+            <h2 class="login-title">Welcome back</h2>
+            <p class="login-sub">Sign in to access your courses and track your progress.</p>
+            <div class="login-error" id="loginError">Incorrect email or password.</div>
+            <div class="login-field">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()">
+            </div>
+            <div class="login-field">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" onkeydown="if(event.key==='Enter')doLogin()">
+            </div>
+            <button class="btn-login" onclick="doLogin()">Sign In →</button>
+            <div class="login-hint"><strong>Demo:</strong> demo@cashcourse.com / cashcourse</div>
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+    <div class="nav-logo" onclick="showPage('home')"><div class="nav-logo-icon">C$</div>CashCourse</div>
+    <ul class="nav-links">
+        <li><a href="#" onclick="showPage('home');return false" id="nav-home">Home</a></li>
+        <li><a href="#" onclick="showPage('curriculum');return false" id="nav-curriculum">Curriculum</a></li>
+        <li><a href="#" onclick="showPage('resources');return false" id="nav-resources">Resources</a></li>
+        <li><a href="#" onclick="showPage('about');return false" id="nav-about">About</a></li>
+    </ul>
+    <div class="nav-cta">
+        <button class="btn-ghost" onclick="doLogout()">Log Out</button>
+        <a href="#" onclick="showPage('curriculum');return false" class="btn-primary">Start Learning</a>
+    </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Free Financial Education</div>
+            <h1 class="hero-title">Learn Money.<br>Build Your <em>Future.</em></h1>
+            <p class="hero-desc">Master personal finance with short, visual lessons anyone can understand.</p>
+            <div class="hero-actions">
+                <a href="#" onclick="showPage('curriculum');return false" class="btn-hero-primary">Start Learning →</a>
+                <a href="#" onclick="showPage('curriculum');return false" class="btn-hero-outline">Explore Curriculum</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><div class="stat-num">63</div><div class="stat-label">Free Lessons</div></div>
+                <div class="stat"><div class="stat-num">9</div><div class="stat-label">Core Chapters</div></div>
+                <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free Forever</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background:white;padding:80px 5%">
+        <div style="text-align:center;margin-bottom:50px">
+            <h2 class="section-title">What You'll Learn</h2>
+            <p style="color:var(--muted)">Master money in 9 chapters, 63 lessons</p>
+        </div>
+        <div class="topics-grid" id="topicsGrid"></div>
+    </section>
+</div>
+
+<!-- CURRICULUM PAGE -->
+<div id="page-curriculum" class="page">
+    <div class="curriculum-hero">
+        <h2 class="section-title">Full Curriculum</h2>
+        <p class="section-desc">Work at your own pace through 9 chapters.</p>
+    </div>
+    <div class="modules-list" id="modulesList"></div>
+</div>
+
+<!-- LESSON PAGE -->
+<div id="page-lesson" class="page">
+    <div class="lesson-page">
+        <div class="lesson-breadcrumb"><a onclick="showPage('curriculum')">← Curriculum</a><span>›</span><span id="lessonBreadChapter">Ch.1</span><span>›</span><span id="lessonBreadTitle">Lesson</span></div>
+        <h1 class="lesson-h1" id="lessonTitle">Lesson Title</h1>
+        <div id="lessonMeta"></div>
+        <div id="lessonContent"></div>
+        <div class="lesson-nav">
+            <a class="ln-btn" onclick="showPage('curriculum')">← Back</a>
+            <a class="ln-btn next" onclick="showPage('curriculum')">Continue →</a>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="page-about" class="page">
+    <section style="padding:120px 5%;max-width:800px;margin:0 auto;text-align:center">
+        <h2 class="section-title">Financial Education for Everyone</h2>
+        <p style="color:var(--muted);font-size:1.1rem;margin:20px 0">Free, visual, self-paced lessons that actually make sense.</p>
+    </section>
+</div>
+
+<!-- RESOURCES PAGE -->
+<div id="page-resources" class="page">
+    <section style="padding:80px 5%;text-align:center">
+        <h2 class="section-title">Interactive Tools</h2>
+        <p style="color:var(--muted);margin-bottom:50px">Coming soon with full interactive features</p>
+    </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="nav-logo" onclick="showPage('home')" style="color:white;margin-bottom:14px">
+                <div class="nav-logo-icon">C$</div>CashCourse
+            </div>
+            <p>Free financial education for everyone.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Learn</h4>
+            <a onclick="showPage('curriculum')">Curriculum</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a onclick="showPage('about')">About</a>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a onclick="return false">Privacy</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 CashCourse</span>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="chapters.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
